@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
-from django.db.models import TextField
+from django.db.models import Sum
 
 
 # Создавайте свои модели здесь.
@@ -12,17 +12,25 @@ class Author(models.Model):
     Результат сохраняется в поле rating объекта Author
     """
 
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    rating = models.IntegerField(default=0)
+    autUser = models.OneToOneField(User, on_delete=models.CASCADE)
+    ratingAut = models.SmallIntegerField(default=0)
 
     def update_rating(self):
-        self.rating = sum([post.rating * 3 for post in self.posts.all()]) \
-                      + sum([comment.rating for comment in self.comments.all()])
+        # Вычисление суммарного рейтинга статей автора
+        post_sum = self.post_set.aggregate(postRating=Sum('rating'))  # Сбор всех данных определённого поля автора
+        temp_sum_p = 0
+        temp_sum_p += post_sum.get('postRating')
+        # Вычисление суммарного рейтинга комментариев автора
+        comment_sum = self.autUser.comment_set.aggregate(commentRating=Sum('rating'))
+        temp_sum_c = 0
+        temp_sum_c += comment_sum.get('commentRating')
+
+        self.ratingAut = temp_sum_p * 3 + temp_sum_c
         self.save()
 
 
 class Category(models.Model):
-    name = models.CharField(max_length=255, unique=True)
+    name = models.CharField(max_length=128, unique=True)
 
 
 class Post(models.Model):
@@ -30,17 +38,19 @@ class Post(models.Model):
     Метод preview() возвращает начало статьи длиной 124 символа с многоточием в конце
     Методы like() и dislike() увеличивают/уменьшают рейтинг на единицу.
     """
-    CHOICES = (
-        ('article', 'Article'),
-        ('news', 'News'),
+    ARTICLE = 'AR'
+    NEWS = 'NW'
+    CATEGOY_CHOICES = (
+        ('AR', 'Статья'),
+        ('NW', 'Новость'),
     )
-    author = models.ForeignKey(Author, on_delete=models.CASCADE, related_name='posts')
-    type = models.CharField(max_length=10, choices=CHOICES)
-    created_at = models.DateTimeField(auto_now_add=True)
-    categories = models.ManyToManyField(Category, through='PostCategory')
-    title = models.CharField(max_length=255)
-    content: TextField = models.TextField()
-    rating = models.IntegerField(default=0)
+    author = models.ForeignKey(Author, on_delete=models.CASCADE)  # Поле Автор
+    type = models.CharField(max_length=2, choices=CATEGOY_CHOICES, default=ARTICLE)  # Поле выбора новость / статья
+    creationDate = models.DateTimeField(auto_now_add=True)  # Авто добавление даты создания
+    postCategory = models.ManyToManyField(Category, through='PostCategory')
+    title = models.CharField(max_length=128)
+    content = models.TextField()
+    rating = models.SmallIntegerField(default=0)
 
     def like(self):
         self.rating += 1
@@ -51,25 +61,23 @@ class Post(models.Model):
         self.save()
 
     def preview(self):
-        if len(self.content) > 124:
-            return self.content[:124] + '...'
-        return self.content
+        return f'{self.content[:123]} ...'
 
 
 class PostCategory(models.Model):
-    post = models.ForeignKey(Post, on_delete=models.CASCADE)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    postThrough = models.ForeignKey(Post, on_delete=models.CASCADE)
+    categoryThrough = models.ForeignKey(Category, on_delete=models.CASCADE)
 
 
 class Comment(models.Model):
     """
     Методы like() и dislike() увеличивают/уменьшают рейтинг на единицу.
     """
-    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comments')
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    commentPost = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comments')
+    commentUser = models.ForeignKey(User, on_delete=models.CASCADE)
     text = models.TextField()
-    created_at = models.DateTimeField(auto_now_add=True)
-    rating = models.IntegerField(default=0)
+    dateCreation = models.DateTimeField(auto_now_add=True)
+    rating = models.SmallIntegerField(default=0)
 
     def like(self):
         self.rating += 1
