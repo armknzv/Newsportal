@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/4.2/topics/settings/
 Полный список настроек и их значений см.
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
-
+import os.path
 from pathlib import Path
 
 # Создавайте пути внутри проекта следующим образом: BASE_DIR 'subdir'.
@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'news.apps.NewsConfig',
 ]
 
+SITE_ID = 1
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -55,7 +57,7 @@ ROOT_URLCONF = 'News_Portal.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'news/templates/news')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
