@@ -1,17 +1,14 @@
 {% extends 'news/default.html' %}
 
-{% load сenzura %}
 
 {% block content %}
 <h1>Добро Пожаловать на News Portal</h1>
 <h2>Список новостей</h2>
-
-{% for article in articles %}
-<div>
-    <h2>{{ article.title|censor }}</h2>
-    <p>{{ article.pub_date|date:"d.m.Y" }}</p>
-    <p>{{ article.text|censor|slice:":20" }}</p>
-    <a href="{% url 'news:news_detail' article.id %}">Читать далее</a>
-</div>
+{% for post in news %}
+<li>
+  <h3><a href="{% url 'news:news_detail' post.id %}">{{ post.title }}</a></h3>
+  <p>{{ post.creationDate|date:"d.m.Y" }}</p>
+  <p>{{ post.content|slice:":20" }} {{"..."}}</p>
+</li>
 {% endfor %}
 {% endblock %}
