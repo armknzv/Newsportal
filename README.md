@@ -67,6 +67,8 @@
 
 5 Все новые страницы должны использовать шаблон default.html как основу.
 
+Дополнительно попробуйте сделать проверку, чтобы фильтр цензурирования применялся только к переменным строкового типа. Иными словами, если фильтр применяется не к строке, разработчик получает ошибку.
+
 --------- DZ-3 (Итоговое задание 4.7 (HW-03)) --------------------------------------------------------------------------------------------------------------
 
 Фильтры и пагинация
@@ -184,6 +186,8 @@ This page should contain all the information about the article. Title, text, and
 4 Write your own censor filter, which replaces the letters of unwanted words in the titles and texts of articles with the "*" symbol.
 
 5 All new pages must use the template default.html as a basis.
+
+Additionally, try to make sure that the censoring filter is applied only to string-type variables. In other words, if the filter is not applied to a row, the developer gets an error.
 
 --------- DZ-3 (Final task 4.7 (HW-03)) ---------------------------------------------------------------------------------------------------------------------
 
