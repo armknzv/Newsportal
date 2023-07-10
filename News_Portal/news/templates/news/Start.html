@@ -6,10 +6,8 @@
 <h1>Добро Пожаловать на News Portal</h1>
 <h2>Список новостей</h2>
 {% for post in news %}
-<li>
-  <h3><a href="{% url 'news:news_detail' post.id %}">{{ post.title }}</a></h3>
+  <h3><a href="{% url 'news:news_detail' post.id %}">{{ post.title|censor }}</a></h3>
   <p>{{ post.creationDate|date:"d.m.Y" }}</p>
-  <p>{{ post.content|slice:":20" }} {{"..."}}</p>
-</li>
+  <p>{{ post.content|censor|slice:":20" }} {{"..."}}</p>
 {% endfor %}
 {% endblock %}
