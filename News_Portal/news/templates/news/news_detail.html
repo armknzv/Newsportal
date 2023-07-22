@@ -3,7 +3,7 @@
 {% load cenzura %}
 
 {% block content %}
-  <h1>{{ post.title|censor }}</h1>
-  <p>{{ post.creationDate|date:"d.m.Y" }}</p>
-  <p>{{ post.content|censor }}</p>
+    <h1>{{ post.title|censor }}</h1>
+    <p>{{ post.creationDate|date:"d.m.Y" }}</p>
+    <p>{{ post.content|censor }}</p>
 {% endblock %}
