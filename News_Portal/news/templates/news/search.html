@@ -1,0 +1,52 @@
+{% extends 'news/default.html' %}
+
+{% load cenzura %}
+
+{% block content %}
+    <h1>Страница поиска</h1>
+<hr />
+    <form action="" method="GET">
+        <input type="text" name="title" placeholder="Поиск по названию" value="{{ request.GET.title }}">
+        <select name="type">
+            <option value="">Всё</option>
+            <option value="NW" {% if request.GET.type == "NW" %}selected{% endif %}>Новости</option>
+            <option value="AR" {% if request.GET.type == "AR" %}selected{% endif %}>Статьи</option>
+        </select>
+        <select name="postCategory">
+            <option value="">Все категории</option>
+            {% for category in categories %}
+                <option value="{{ category.id }}" {% if request.GET.postCategory == category.id %}selected{% endif %}>
+                    {{ category.name }}</option>
+            {% endfor %}
+        </select>
+        <input type="date" name="creationDate" placeholder="Поиск по дате" value="{{ request.GET.creationDate }}">
+        <button type="submit">Поиск</button>
+    </form>
+<hr />
+    <ul>
+        {% for post in search %}
+            <h4><a href="{% url 'news:news_detail' post.id %}">{{ post.title|censor }}</a></h4>
+        {% empty %}
+            <h3>Ничего не найдено</h3>
+        {% endfor %}
+    </ul>
+<hr />
+    {% if page_obj.has_previous %}
+    <!-- Для каждой ссылки пагинации указываем обработку через новый тег -->
+        <a href="?page=1">&laquo; 1</a>
+        {% if page_obj.previous_page_number != 1 %}
+            ...
+            <a href="?page={{ page_obj.previous_page_number }}">{{ page_obj.previous_page_number }}</a>
+        {% endif %}
+    {% endif %}
+
+    {{ page_obj.number }}
+
+    {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}">{{ page_obj.next_page_number }}</a>
+        {% if paginator.num_pages != page_obj.next_page_number %}
+            ...
+            <a href="?page={{ page_obj.paginator.num_pages }}">{{ page_obj.paginator.num_pages }}</a>
+        {% endif %}
+    {% endif %}
+{% endblock %}
