@@ -1,5 +1,6 @@
 import django_filters
-from .models import Post
+from .models import *  # (*) Импорт всех моделей
+from django import forms
 
 
 class PostFilter(django_filters.FilterSet):
@@ -7,11 +8,21 @@ class PostFilter(django_filters.FilterSet):
     Создаем свой набор фильтров для модели Post.
     FilterSet, который мы наследуем, должен чем-то напомнить знакомые вам Django дженерики.
     """
-    type = django_filters.CharFilter(lookup_expr='exact')  # поиск по типу
-    title = django_filters.CharFilter(lookup_expr='icontains')  # поиск по названию
-    author = django_filters.CharFilter(lookup_expr='icontains'),  # поиск по автору
-    postCategory = django_filters.CharFilter(lookup_expr='exact')  # поиск по категории
-    creationDate = django_filters.DateFilter(field_name='creationDate', lookup_expr='gte')
+    # поиск по названию
+    title = django_filters.CharFilter(field_name='title', lookup_expr='icontains', label='Заголовок',
+                                      widget=forms.TextInput(attrs={'placeholder': 'Поиск по названию'}))
+    # # поиск по автору
+    author = django_filters.ModelChoiceFilter(field_name='author', empty_label='Все авторы', label='Авторы',
+                                              queryset=Author.objects.all())
+    # поиск по типу
+    type = django_filters.ChoiceFilter(field_name='type', empty_label='Все типы', label='Тип',
+                                       choices=Post.CATEGOY_CHOICES)
+    # поиск по категории
+    postCategory = django_filters.ModelChoiceFilter(field_name='postCategory', empty_label='Все категории',
+                                                    label='Категория', queryset=Category.objects.all())
+    # поиск по дате
+    creationDate = django_filters.DateFilter(field_name='creationDate', lookup_expr='gte', label='Дата',
+                                             widget=forms.DateInput(attrs={'type': 'date'}))
 
     class Meta:
         """
@@ -19,4 +30,4 @@ class PostFilter(django_filters.FilterSet):
         """
         model = Post
         # В fields мы описываем по каким полям модели будет производиться фильтрация.
-        fields = ['type', 'title', 'author', 'postCategory', 'creationDate']
+        fields = ['type', 'author', 'title', 'postCategory', 'creationDate']

@@ -28,9 +28,17 @@ class Author(models.Model):
         self.ratingAut = temp_sum_p * 3 + temp_sum_c
         self.save()
 
+    # для удобного отображения на странице администратора
+    def __str__(self):
+        return self.autUser.username
+
 
 class Category(models.Model):
     name = models.CharField(max_length=128, unique=True)
+
+    # для отображения имён вместо объектов
+    def __str__(self):
+        return self.name
 
 
 class Post(models.Model):
@@ -63,10 +71,18 @@ class Post(models.Model):
     def preview(self):
         return f'{self.content[:123]} ...'
 
+    # для удобного отображения на странице администратора
+    def __str__(self):
+        return self.title
+
 
 class PostCategory(models.Model):
     postThrough = models.ForeignKey(Post, on_delete=models.CASCADE)
     categoryThrough = models.ForeignKey(Category, on_delete=models.CASCADE)
+
+    # для удобного отображения на странице администратора
+    def __str__(self):
+        return self.postThrough
 
 
 class Comment(models.Model):
@@ -86,3 +102,7 @@ class Comment(models.Model):
     def dislike(self):
         self.rating -= 1
         self.save()
+
+    # для удобного отображения на странице администратора
+    def __str__(self):
+        return self.text

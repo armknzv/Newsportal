@@ -4,7 +4,9 @@
 
 {% block content %}
 <h1>Добро Пожаловать на News Portal</h1>
+<hr />
     <h2>Самые свежие новости</h2>
+<hr />
         {% for post in news %}
             <h3><a href="{% url 'news:news_detail' post.id %}">{{ post.title|censor }}</a></h3>
             <p>{{ post.creationDate|date:"d.m.Y" }}</p>
