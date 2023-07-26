@@ -1,6 +1,7 @@
 from django.contrib.auth.models import User
 from django.db import models
 from django.db.models import Sum
+from django.urls import reverse
 
 
 # Создавайте свои модели здесь.
@@ -74,6 +75,10 @@ class Post(models.Model):
     # для удобного отображения на странице администратора
     def __str__(self):
         return self.title
+
+    # какую страницу нужно открыть после создания
+    def get_absolute_url(self):
+        return reverse('Start', args=[str(self.id)])
 
 
 class PostCategory(models.Model):
