@@ -42,9 +42,12 @@ class NewsCreate(CreateView):
     template_name = 'news_create.html'
     success_url = '/'
 
-    def form_valid(self, form):
-        form.instance.type = 'NW'
-        return super().form_valid(form)
+    def form_valid(self, post):
+        post = post.save(commit=False)
+        post.categoryType = 'NW'
+        post.Author = self.request.user.author
+        post.save()
+        return super().form_valid(post)
 
 
 class NewsEdit(UpdateView):
@@ -81,9 +84,12 @@ class ArticleCreate(CreateView):
     template_name = 'article_create.html'
     success_url = '/'
 
-    def form_valid(self, form):
-        form.instance.type = 'AR'
-        return super().form_valid(form)
+    def form_valid(self, post):
+        post = post.save(commit=False)
+        post.categoryType = 'AR'
+        post.Author = self.request.user.author
+        post.save()
+        return super().form_valid(post)
 
 
 class ArticleEdit(UpdateView):

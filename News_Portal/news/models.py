@@ -78,7 +78,7 @@ class Post(models.Model):
 
     # какую страницу нужно открыть после создания
     def get_absolute_url(self):
-        return reverse('Start', args=[str(self.id)])
+        return reverse('Start')
 
 
 class PostCategory(models.Model):
