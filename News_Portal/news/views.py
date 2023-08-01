@@ -14,8 +14,8 @@ get_object_or_404 - используется для получения объе�
 
 # ====== Стартовая страница ============================================================================================
 def Start_Padge(request):
-    news = Post.objects.filter(type='NW').order_by('-creationDate')[:4]
-    return render(request, 'flatpages/Start.html', {'news': news})
+    posts = Post.objects.filter(type='NW').order_by('-creationDate')[:4]
+    return render(request, 'flatpages/Start.html', {'posts': posts})
 
 
 # ====== Новости =======================================================================================================
@@ -42,12 +42,12 @@ class NewsCreate(CreateView):
     template_name = 'news_create.html'
     success_url = '/'
 
-    def form_valid(self, post):
-        post = post.save(commit=False)
-        post.categoryType = 'NW'
-        post.Author = self.request.user.author
+    def form_valid(self, form):
+        post = form.save(commit=False)
+        post.type = 'NW'
+        post.author = self.request.user.author
         post.save()
-        return super().form_valid(post)
+        return super().form_valid(form)
 
 
 class NewsEdit(UpdateView):
@@ -84,12 +84,12 @@ class ArticleCreate(CreateView):
     template_name = 'article_create.html'
     success_url = '/'
 
-    def form_valid(self, post):
-        post = post.save(commit=False)
-        post.categoryType = 'AR'
-        post.Author = self.request.user.author
+    def form_valid(self, form):
+        post = form.save(commit=False)
+        post.type = 'AR'
+        post.author = self.request.user.author
         post.save()
-        return super().form_valid(post)
+        return super().form_valid(form)
 
 
 class ArticleEdit(UpdateView):

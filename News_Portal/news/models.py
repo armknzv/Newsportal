@@ -77,17 +77,14 @@ class Post(models.Model):
         return self.title
 
     # какую страницу нужно открыть после создания
-    def get_absolute_url(self):
+    @staticmethod
+    def get_absolute_url():
         return reverse('Start')
 
 
 class PostCategory(models.Model):
     postThrough = models.ForeignKey(Post, on_delete=models.CASCADE)
     categoryThrough = models.ForeignKey(Category, on_delete=models.CASCADE)
-
-    # для удобного отображения на странице администратора
-    def __str__(self):
-        return self.postThrough
 
 
 class Comment(models.Model):
