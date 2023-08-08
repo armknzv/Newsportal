@@ -1,9 +1,9 @@
 # SF_News_Portal
--------------------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------
 Русский (Russian)
--------------------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------
 
---------- DZ-1 (Итоговое задание 2.9 (HW-03)) ---------------------------------------------------------------------------------------------------------------
+--------- DZ-1 (Итоговое задание 2.9 (HW-03)) -------------------------------------------------------------------------------------------
 
 1 Модель Author
 Модель, содержащая объекты всех авторов.
@@ -51,7 +51,7 @@
  суммарный рейтинг всех комментариев автора;
  суммарный рейтинг всех комментариев к статьям автора.
 
---------- DZ-2 (Итоговое задание 3.6 (HW-03)) --------------------------------------------------------------------------------------------------------------
+--------- DZ-2 (Итоговое задание 3.6 (HW-03)) -------------------------------------------------------------------------------------------
 
 В ходе работы с модулем вы должны были выполнить следующие задания:
 
@@ -69,7 +69,7 @@
 
 Дополнительно попробуйте сделать проверку, чтобы фильтр цензурирования применялся только к переменным строкового типа. Иными словами, если фильтр применяется не к строке, разработчик получает ошибку.
 
---------- DZ-3 (Итоговое задание 4.7 (HW-03)) --------------------------------------------------------------------------------------------------------------
+--------- DZ-3 (Итоговое задание 4.7 (HW-03)) -------------------------------------------------------------------------------------------
 
 Фильтры и пагинация
 
@@ -106,7 +106,7 @@
 
 При этом не бойтесь сначала поискать информацию в интернете и пробовать разные подходы к решению задачи!
 
---------- DZ-4 (Итоговый проект 5.8.1 (HW-03)) --------------------------------------------------------------------------------------------------------------
+--------- DZ-4 (Итоговый проект 5.8.1 (HW-03)) ------------------------------------------------------------------------------------------
 
 Задание
 1 Добавьте форму регистрации на сайте с возможностью зарегистрироваться с помощью почты и пароля или через Yandex-аккаунт. Для этого используйте пакет 
@@ -117,11 +117,56 @@ django-allauth. После того как пользователь войдёт
 
 3 Проверьте работу прав.
 
--------------------------------------------------------------------------------------------------------------------------------------------------------------
-English (Английский)
--------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------- DZ-5 (Итоговый проект 5.8.1 (HW-03)) ------------------------------------------------------------------------------------------
 
---------- DZ-1 (Final Task 2.9 (HW-03)) ---------------------------------------------------------------------------------------------------------------------
+1 Добавьте форму регистрации на сайте с возможностью зарегистрироваться с помощью почты и пароля или через Yandex-аккаунт. Для этого используйте пакет 
+django-allauth. После того как пользователь войдёт, его должно перенаправить на страницу с новостями.
+2 Настройте проверки у представлений создания и редактирования новостей и статей. Создайте группу authors, выдайте ей права на создание и изменение новых 
+записей в разделах «Статьи» и «Новости».
+3 Проверьте работу прав.
+
+--------- DZ-6 (Задание 6.7.1 (HW-03)) --------------------------------------------------------------------------------------------------
+
+1 Добавьте подписки на рассылки о новых материалах в категориях:
+* страница должна быть доступна по адресу https://127.0.0.1:8000/subscriptions/;
+* должна быть создана модель Subscriber для хранения подписок пользователей;
+* при публикации новости все подписчики должны получить сообщение на почту со ссылкой на страницу для прочтения новости (используйте для этого 
+сигнал post_save).
+2 Реализуйте отправку списка статей на почту подписчиков категорий каждую неделю на основе той же модели Subscriber:
+* подключите приложение django_apscheduler;
+* добавьте команду запуска периодических задач;
+* настройте периодическую задачу отправки списка статей каждую пятницу в 18:00;
+* составьте сообщение со ссылками на статьи;
+* сообщение должно содержать только статьи, которые появились с момента предыдущей рассылки.
+При разработке лучше всего использовать вывод отправляемых писем в консоль ('django.core.mail.backends.console.EmailBackend').
+
+--------- DZ-7 (Задание 7.5 (HW-03)) ----------------------------------------------------------------------------------------------------
+
+Продолжаем работать над проектом новостного приложения. В этом модуле мы, конечно же, добавим работу с асинхронными запросами. Для успешного выполнения этого итогового задания модуля вам необходимо:
+
+1 Установить Redis.
+2 Установить Celery.
+3 Произвести необходимые конфигурации Django для соединения всех компонент системы.
+4 Реализовать рассылку уведомлений подписчикам после создания новости.
+5 Реализовать еженедельную рассылку с последними новостями (каждый понедельник в 8:00 утра).
+
+--------- DZ-8 (Задание 7.5 (HW-03)) ----------------------------------------------------------------------------------------------------
+
+Дополните свой новостной портал:
+
+1 Добавьте кэширование на страницы с новостями (по 5 минут на каждую) и на главную страницу (одну минуту).
+2 В шаблонах постарайтесь кэшировать все навигационные элементы (меню, сайдбары и т. д.). Количество кэшируемого времени остаётся на ваше 
+усмотрение. Кроме того, можете использовать любую систему кэширования, какая вам более по нраву.
+
+Дополните свой новостной портал
+1 Добавьте кеширование для статей. Пока статья не изменилась, она должна сохраняться в кэше.
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------
+English (Английский)
+-----------------------------------------------------------------------------------------------------------------------------------------
+
+--------- DZ-1 (Final Task 2.9 (HW-03)) -------------------------------------------------------------------------------------------------
 
 1 Author Model
 A model containing objects of all authors.
@@ -171,7 +216,7 @@ the total rating of each author's article is multiplied by 3;
 the total rating of all the author's comments;
 the total rating of all comments to the author's articles.
 
---------- DZ-2 (Final task 3.6 (HW-03)) ---------------------------------------------------------------------------------------------------------------------
+--------- DZ-2 (Final task 3.6 (HW-03)) -------------------------------------------------------------------------------------------------
 
 While working with the module, you had to complete the following tasks:
 
@@ -189,7 +234,7 @@ This page should contain all the information about the article. Title, text, and
 
 Additionally, try to make sure that the censoring filter is applied only to string-type variables. In other words, if the filter is not applied to a row, the developer gets an error.
 
---------- DZ-3 (Final task 4.7 (HW-03)) ---------------------------------------------------------------------------------------------------------------------
+--------- DZ-3 (Final task 4.7 (HW-03)) -------------------------------------------------------------------------------------------------
 
 Filters and pagination
 
@@ -226,7 +271,7 @@ If you are a little confused, due to the fact that we have one model, and the pa
 
 At the same time, do not be afraid to first search for information on the Internet and try different approaches to solving the problem!
 
---------- DZ-4 (Final draft 5.8.1 (HW-03)) ------------------------------------------------------------------------------------------------------------------
+--------- DZ-4 (Final draft 5.8.1 (HW-03)) ----------------------------------------------------------------------------------------------
 
 Task
 1 Add a registration form on the website with the ability to register using email and password or through a Yandex account. To do this, use the 
@@ -235,3 +280,47 @@ django-allauth package. After the user logs in, he should be redirected to the n
 2 Set up checks for the views of creating and editing news and articles. Create the authors group, grant it the rights to create and edit new entries in the "Articles" and "News" sections.
 
 3 Check the operation of the rights.
+
+--------- DZ-5 (Final draft 5.8.1 (HW-03)) ----------------------------------------------------------------------------------------------
+
+1 Add a registration form on the website with the ability to register using email and password or through a Yandex account. To do this, use
+the django-allauth package. After the user logs in, he should be redirected to the news page.
+2 Set up checks for the views of creating and editing news and articles. Create the authors group, grant it the rights to create and modify new ones 
+entries in the "Articles" and "News" sections.
+3 Check the operation of the rights.
+
+--------- DZ-6 (Task 6.7.1 (HW-03)) -----------------------------------------------------------------------------------------------------
+
+1 Add subscriptions to newsletters about new materials in the categories:
+* the page must be available at https://127.0.0.1:8000/subscriptions/;
+* a Subscriber model must be created to store user subscriptions;
+* when publishing news, all subscribers should receive an email with a link to the page to read the news (use for this 
+the post_save signal).
+2 Implement sending a list of articles to the mail of subscribers of categories every week based on the same Subscriber model:
+* connect the django_apscheduler application;
+* add a command to run periodic tasks;
+* set up a periodic task to send a list of articles every Friday at 18:00;
+* compose a message with links to articles;
+* the message should contain only articles that have appeared since the previous mailing.
+When developing, it is best to use the output of sent emails to the console ('django.core.mail.backends.console.EmailBackend').
+
+--------- DZ-7 (Task 7.5 (HW-03)) -------------------------------------------------------------------------------------------------------
+
+We continue to work on the news application project. In this module, of course, we will add work with asynchronous requests. To successfully complete this final task of the module, you need:
+
+1 Install Redis.
+2 Install Celery.
+3 Make the necessary Django configurations to connect all system components.
+4 Implement the distribution of notifications to subscribers after the news is created.
+5 Implement a weekly newsletter with the latest news (every Monday at 8:00 am).
+
+--------- DZ-8 (Task 7.5 (HW-03)) -------------------------------------------------------------------------------------------------------
+
+Complete your news portal:
+
+1 Add caching to the news pages (5 minutes each) and to the main page (one minute).
+2 In the templates, try to cache all navigation elements (menus, sidebars, etc.). The amount of cached time remains on your 
+discretion. In addition, you can use any caching system that you prefer.
+
+Complete your news portal
+1 Add caching for articles. As long as the article has not changed, it should be stored in the cache.
