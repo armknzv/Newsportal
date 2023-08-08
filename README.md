@@ -12,7 +12,8 @@
  рейтинг пользователя. Ниже будет дано описание того, как этот рейтинг можно посчитать.
 
 2 Модель Category
-Категории новостей/статей — темы, которые они отражают (спорт, политика, образование и т. д.). Имеет единственное поле: название категории. Поле должно быть уникальным (в определении поля необходимо написать параметр unique = True).
+Категории новостей/статей — темы, которые они отражают (спорт, политика, образование и т. д.). Имеет единственное поле: название категории.
+Поле должно быть уникальным (в определении поля необходимо написать параметр unique = True).
 
 3 Модель Post
 Эта модель должна содержать в себе статьи и новости, которые создают пользователи. Каждый объект может иметь одну или несколько категорий.
@@ -43,7 +44,8 @@
 
 1 Методы like() и dislike() в моделях Comment и Post, которые увеличивают/уменьшают рейтинг на единицу.
 
-2 Метод preview() модели Post, который возвращает начало статьи (предварительный просмотр) длиной 124 символа и добавляет многоточие в конце.
+2 Метод preview() модели Post, который возвращает начало статьи (предварительный просмотр) длиной 124 символа и добавляет многоточие 
+в конце.
 
 3 Метод update_rating() модели Author, который обновляет рейтинг текущего автора (метод принимает в качестве аргумента только self).
 Он состоит из следующего:
@@ -67,16 +69,18 @@
 
 5 Все новые страницы должны использовать шаблон default.html как основу.
 
-Дополнительно попробуйте сделать проверку, чтобы фильтр цензурирования применялся только к переменным строкового типа. Иными словами, если фильтр применяется не к строке, разработчик получает ошибку.
+Дополнительно попробуйте сделать проверку, чтобы фильтр цензурирования применялся только к переменным строкового типа. Иными словами, 
+если фильтр применяется не к строке, разработчик получает ошибку.
 
 --------- DZ-3 (Итоговое задание 4.7 (HW-03)) -------------------------------------------------------------------------------------------
 
 Фильтры и пагинация
 
-1 Добавьте постраничный вывод на /news/, чтобы на одной странице было не больше 10 новостей и видны номера лишь ближайших страниц, а также возможность 
-перехода к первой или последней странице.
+1 Добавьте постраничный вывод на /news/, чтобы на одной странице было не больше 10 новостей и видны номера лишь ближайших страниц, а 
+также возможность перехода к первой или последней странице.
 
-2 Добавьте страницу /news/search. На ней должна быть реализована возможность искать новости по определённым критериям. Критерии должны быть следующие:
+2 Добавьте страницу /news/search. На ней должна быть реализована возможность искать новости по определённым критериям. Критерии должны 
+быть следующие:
 	по названию;
 	по категории;
 	позже указываемой даты.
@@ -84,9 +88,9 @@
 3 Убедитесь, что можно выполнить фильтрацию сразу по нескольким критериям.
 Для вывода поля фильтрации по датам вам может понадобиться указать специальный тип в HTML.
 
-Сложность в том, что форма за нас генерируется с помощью django-filter. Нам нужно сообщить ей о том, что мы хотим видеть на сайте календарь для выбора даты 
-и времени. Браузер сможет отобразить автоматически сам интерфейс календаря (от нас не требуется его верстать). Для решения задачи правильного вывода формы 
-нам поможет более сложная настройка класса с описанием фильтров.
+Сложность в том, что форма за нас генерируется с помощью django-filter. Нам нужно сообщить ей о том, что мы хотим видеть на сайте 
+календарь для выбора даты и времени. Браузер сможет отобразить автоматически сам интерфейс календаря (от нас не требуется его верстать). 
+Для решения задачи правильного вывода формы нам поможет более сложная настройка класса с описанием фильтров.
 
 Вам необходимо изучить информацию по следующим ссылкам и постараться реализовать выбор даты:
 
@@ -102,27 +106,26 @@
 	/articles/create/
 	/articles/<int:pk>/edit/
 	/articles/<int:pk>/delete/
-Если вы немного запутались, ввиду того, что модель у нас одна, а страницы под создание статей и новостей должны быть отдельно, то прочитайте подсказку.
-
-При этом не бойтесь сначала поискать информацию в интернете и пробовать разные подходы к решению задачи!
 
 --------- DZ-4 (Итоговый проект 5.8.1 (HW-03)) ------------------------------------------------------------------------------------------
 
 Задание
-1 Добавьте форму регистрации на сайте с возможностью зарегистрироваться с помощью почты и пароля или через Yandex-аккаунт. Для этого используйте пакет 
-django-allauth. После того как пользователь войдёт, его должно перенаправить на страницу с новостями.
+1 Добавьте форму регистрации на сайте с возможностью зарегистрироваться с помощью почты и пароля или через Yandex-аккаунт. Для этого 
+используйте пакет django-allauth. После того как пользователь войдёт, его должно перенаправить на страницу с новостями.
 
-2 Настройте проверки у представлений создания и редактирования новостей и статей. Создайте группу authors, выдайте ей права на создание и изменение новых 
-записей в разделах «Статьи» и «Новости».
+2 Настройте проверки у представлений создания и редактирования новостей и статей. Создайте группу authors, выдайте ей права на создание 
+и изменение новых записей в разделах «Статьи» и «Новости».
 
 3 Проверьте работу прав.
 
 --------- DZ-5 (Итоговый проект 5.8.1 (HW-03)) ------------------------------------------------------------------------------------------
 
-1 Добавьте форму регистрации на сайте с возможностью зарегистрироваться с помощью почты и пароля или через Yandex-аккаунт. Для этого используйте пакет 
-django-allauth. После того как пользователь войдёт, его должно перенаправить на страницу с новостями.
-2 Настройте проверки у представлений создания и редактирования новостей и статей. Создайте группу authors, выдайте ей права на создание и изменение новых 
-записей в разделах «Статьи» и «Новости».
+1 Добавьте форму регистрации на сайте с возможностью зарегистрироваться с помощью почты и пароля или через Yandex-аккаунт. Для этого 
+используйте пакет django-allauth. После того как пользователь войдёт, его должно перенаправить на страницу с новостями.
+
+2 Настройте проверки у представлений создания и редактирования новостей и статей. Создайте группу authors, выдайте ей права на создание 
+и изменение новых записей в разделах «Статьи» и «Новости».
+
 3 Проверьте работу прав.
 
 --------- DZ-6 (Задание 6.7.1 (HW-03)) --------------------------------------------------------------------------------------------------
@@ -130,19 +133,22 @@ django-allauth. После того как пользователь войдёт
 1 Добавьте подписки на рассылки о новых материалах в категориях:
 * страница должна быть доступна по адресу https://127.0.0.1:8000/subscriptions/;
 * должна быть создана модель Subscriber для хранения подписок пользователей;
-* при публикации новости все подписчики должны получить сообщение на почту со ссылкой на страницу для прочтения новости (используйте для этого 
-сигнал post_save).
+* при публикации новости все подписчики должны получить сообщение на почту со ссылкой на страницу для прочтения новости (используйте
+  для этого сигнал post_save).
+  
 2 Реализуйте отправку списка статей на почту подписчиков категорий каждую неделю на основе той же модели Subscriber:
 * подключите приложение django_apscheduler;
 * добавьте команду запуска периодических задач;
 * настройте периодическую задачу отправки списка статей каждую пятницу в 18:00;
 * составьте сообщение со ссылками на статьи;
 * сообщение должно содержать только статьи, которые появились с момента предыдущей рассылки.
+  
 При разработке лучше всего использовать вывод отправляемых писем в консоль ('django.core.mail.backends.console.EmailBackend').
 
 --------- DZ-7 (Задание 7.5 (HW-03)) ----------------------------------------------------------------------------------------------------
 
-Продолжаем работать над проектом новостного приложения. В этом модуле мы, конечно же, добавим работу с асинхронными запросами. Для успешного выполнения этого итогового задания модуля вам необходимо:
+Продолжаем работать над проектом новостного приложения. В этом модуле мы, конечно же, добавим работу с асинхронными запросами. Для 
+успешного выполнения этого итогового задания модуля вам необходимо:
 
 1 Установить Redis.
 2 Установить Celery.
@@ -155,10 +161,12 @@ django-allauth. После того как пользователь войдёт
 Дополните свой новостной портал:
 
 1 Добавьте кэширование на страницы с новостями (по 5 минут на каждую) и на главную страницу (одну минуту).
+
 2 В шаблонах постарайтесь кэшировать все навигационные элементы (меню, сайдбары и т. д.). Количество кэшируемого времени остаётся на ваше 
 усмотрение. Кроме того, можете использовать любую систему кэширования, какая вам более по нраву.
 
 Дополните свой новостной портал
+
 1 Добавьте кеширование для статей. Пока статья не изменилась, она должна сохраняться в кэше.
 
 
@@ -175,8 +183,8 @@ one-to-one relationship with the built-in user model;
 user rating. Below is a description of how this rating can be calculated.
 
 2 Model Category
-Categories of news/articles — the topics they reflect (sports, politics, education, etc.). Has a single field: the name of the category. The field must be 
-unique (the unique = True parameter must be written in the field definition).
+Categories of news/articles — the topics they reflect (sports, politics, education, etc.). Has a single field: the name of the category. 
+The field must be unique (the unique = True parameter must be written in the field definition).
 
 3 Post Model
 This model should contain articles and news that users create. Each object can have one or more categories.
@@ -207,10 +215,11 @@ Models implement methods:
 
 1 Like() and dislike() methods in the Comment and Post models, which increase/decrease the rating by one.
 
-2 The preview() method of the Post model, which returns the beginning of the article (preview) with a length of 124 characters and adds an ellipsis at the 
-end.
+2 The preview() method of the Post model, which returns the beginning of the article (preview) with a length of 124 characters and adds 
+an ellipsis at the end.
 
-3 The update_rating() method of the Author model, which updates the rating of the current author (the method takes only self as an argument).
+3 The update_rating() method of the Author model, which updates the rating of the current author (the method takes only self as an 
+argument).
 It consists of the following:
 the total rating of each author's article is multiplied by 3;
 the total rating of all the author's comments;
@@ -232,13 +241,15 @@ This page should contain all the information about the article. Title, text, and
 
 5 All new pages must use the template default.html as a basis.
 
-Additionally, try to make sure that the censoring filter is applied only to string-type variables. In other words, if the filter is not applied to a row, the developer gets an error.
+Additionally, try to make sure that the censoring filter is applied only to string-type variables. In other words, if the filter 
+is not applied to a row, the developer gets an error.
 
 --------- DZ-3 (Final task 4.7 (HW-03)) -------------------------------------------------------------------------------------------------
 
 Filters and pagination
 
-1 Add a page-by-page output to /news/ so that there are no more than 10 news on one page and only the numbers of the nearest pages are visible, as well as 
+1 Add a page-by-page output to /news/ so that there are no more than 10 news on one page and only the numbers of the nearest pages 
+are visible, as well as 
 the ability to go to the first or last page.
 
 2 Add the /news/search page. It should be able to search for news by certain criteria. The criteria should be as follows:
@@ -249,9 +260,10 @@ later than the specified date.
 3 Make sure that you can filter by several criteria at once.
 To display the date filtering field, you may need to specify a special type in HTML.
 
-The difficulty is that the form is generated for us using django-filter. We need to inform her that we want to see a calendar on the site for choosing the 
-date and time. The browser will be able to display the calendar interface itself automatically (we do not need to make it up). To solve the problem of the 
-correct output of the form, a more complex configuration of the class with a description of filters will help us.
+The difficulty is that the form is generated for us using django-filter. We need to inform her that we want to see a calendar 
+on the site for choosing the date and time. The browser will be able to display the calendar interface itself automatically 
+(we do not need to make it up). To solve the problem of the correct output of the form, a more complex configuration of the class with 
+a description of filters will help us.
 
 You need to study the information on the following links and try to implement the date selection:
 
@@ -267,26 +279,26 @@ Program pages for creating, editing, and deleting news and articles. We suggest 
     /articles/create/
     /articles/<int:pk>/edit/
     /articles/<int:pk>/delete/
-If you are a little confused, due to the fact that we have one model, and the pages for creating articles and news should be separate, then read the hint.
-
-At the same time, do not be afraid to first search for information on the Internet and try different approaches to solving the problem!
 
 --------- DZ-4 (Final draft 5.8.1 (HW-03)) ----------------------------------------------------------------------------------------------
 
 Task
-1 Add a registration form on the website with the ability to register using email and password or through a Yandex account. To do this, use the 
-django-allauth package. After the user logs in, he should be redirected to the news page.
+1 Add a registration form on the website with the ability to register using email and password or through a Yandex account. To do this, 
+use the django-allauth package. After the user logs in, he should be redirected to the news page.
 
-2 Set up checks for the views of creating and editing news and articles. Create the authors group, grant it the rights to create and edit new entries in the "Articles" and "News" sections.
+2 Set up checks for the views of creating and editing news and articles. Create the authors group, grant it the rights to create and 
+edit new entries in the "Articles" and "News" sections.
 
 3 Check the operation of the rights.
 
 --------- DZ-5 (Final draft 5.8.1 (HW-03)) ----------------------------------------------------------------------------------------------
 
-1 Add a registration form on the website with the ability to register using email and password or through a Yandex account. To do this, use
-the django-allauth package. After the user logs in, he should be redirected to the news page.
-2 Set up checks for the views of creating and editing news and articles. Create the authors group, grant it the rights to create and modify new ones 
-entries in the "Articles" and "News" sections.
+1 Add a registration form on the website with the ability to register using email and password or through a Yandex account. To do this, 
+use the django-allauth package. After the user logs in, he should be redirected to the news page.
+
+2 Set up checks for the views of creating and editing news and articles. Create the authors group, grant it the rights to create and 
+modify new ones entries in the "Articles" and "News" sections.
+
 3 Check the operation of the rights.
 
 --------- DZ-6 (Task 6.7.1 (HW-03)) -----------------------------------------------------------------------------------------------------
@@ -296,22 +308,29 @@ entries in the "Articles" and "News" sections.
 * a Subscriber model must be created to store user subscriptions;
 * when publishing news, all subscribers should receive an email with a link to the page to read the news (use for this 
 the post_save signal).
+
 2 Implement sending a list of articles to the mail of subscribers of categories every week based on the same Subscriber model:
 * connect the django_apscheduler application;
 * add a command to run periodic tasks;
 * set up a periodic task to send a list of articles every Friday at 18:00;
 * compose a message with links to articles;
 * the message should contain only articles that have appeared since the previous mailing.
+  
 When developing, it is best to use the output of sent emails to the console ('django.core.mail.backends.console.EmailBackend').
 
 --------- DZ-7 (Task 7.5 (HW-03)) -------------------------------------------------------------------------------------------------------
 
-We continue to work on the news application project. In this module, of course, we will add work with asynchronous requests. To successfully complete this final task of the module, you need:
+We continue to work on the news application project. In this module, of course, we will add work with asynchronous requests. 
+To successfully complete this final task of the module, you need:
 
 1 Install Redis.
+
 2 Install Celery.
+
 3 Make the necessary Django configurations to connect all system components.
+
 4 Implement the distribution of notifications to subscribers after the news is created.
+
 5 Implement a weekly newsletter with the latest news (every Monday at 8:00 am).
 
 --------- DZ-8 (Task 7.5 (HW-03)) -------------------------------------------------------------------------------------------------------
@@ -319,8 +338,10 @@ We continue to work on the news application project. In this module, of course, 
 Complete your news portal:
 
 1 Add caching to the news pages (5 minutes each) and to the main page (one minute).
-2 In the templates, try to cache all navigation elements (menus, sidebars, etc.). The amount of cached time remains on your 
-discretion. In addition, you can use any caching system that you prefer.
+
+2 In the templates, try to cache all navigation elements (menus, sidebars, etc.). The amount of cached time remains on your discretion. 
+In addition, you can use any caching system that you prefer.
 
 Complete your news portal
+
 1 Add caching for articles. As long as the article has not changed, it should be stored in the cache.
