@@ -20,5 +20,6 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('news.urls')),
-    path("accounts/", include("allauth.urls")),
+    path('accounts/', include('allauth.urls')),  # запросы от пользователей по ссылкам, которые
+    # начинаются с /accounts/
 ]

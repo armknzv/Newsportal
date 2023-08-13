@@ -1,6 +1,6 @@
 from django.core.paginator import Paginator
 from django.shortcuts import render, get_object_or_404
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import PermissionRequiredMixin, LoginRequiredMixin
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
 from .filters import PostFilter
@@ -15,9 +15,8 @@ get_object_or_404 - используется для получения объе�
 
 # ====== Стартовая страница ============================================================================================
 def Start_Padge(request):
-    posts = Post.objects.filter(type='NW').order_by('-creationDate')[:4]
-    return render(request, 'flatpages/Start.html', {'posts': posts})
-
+    news = Post.objects.filter(type='NW').order_by('-creationDate')[:4]
+    return render(request, 'flatpages/Start.html', {'news': news})
 
 # ====== Новости =======================================================================================================
 class NewsList(ListView):
@@ -37,7 +36,8 @@ class NewsDetail(DetailView):
     context_object_name = 'post'
 
 
-class NewsCreate(LoginRequiredMixin, CreateView):
+class NewsCreate(PermissionRequiredMixin, LoginRequiredMixin, CreateView):
+    permission_required = ('news.add_post',)
     raise_exception = True
     model = Post
     form_class = NewsForm
@@ -52,7 +52,8 @@ class NewsCreate(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
 
-class NewsEdit(LoginRequiredMixin, UpdateView):
+class NewsEdit(PermissionRequiredMixin, LoginRequiredMixin, UpdateView):
+    permission_required = ('news.change_post',)
     raise_exception = True
     model = Post
     form_class = NewsForm
@@ -60,7 +61,8 @@ class NewsEdit(LoginRequiredMixin, UpdateView):
     success_url = '/'
 
 
-class NewsDelete(LoginRequiredMixin, DeleteView):
+class NewsDelete(PermissionRequiredMixin, LoginRequiredMixin, DeleteView):
+    permission_required = ('news.add_post',)
     raise_exception = True
     model = Post
     template_name = 'news_delete.html'
@@ -82,7 +84,8 @@ def article_detail(request, post_id):
     return render(request, 'news/article_detail.html', {'post': post})
 
 
-class ArticleCreate(LoginRequiredMixin, CreateView):
+class ArticleCreate(PermissionRequiredMixin, LoginRequiredMixin, CreateView):
+    permission_required = ('news.add_post',)
     raise_exception = True
     model = Post
     form_class = ArticleForm
@@ -97,7 +100,7 @@ class ArticleCreate(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
 
-class ArticleEdit(LoginRequiredMixin, UpdateView):
+class ArticleEdit(PermissionRequiredMixin, LoginRequiredMixin, UpdateView):
     raise_exception = True
     model = Post
     form_class = ArticleForm
@@ -105,7 +108,7 @@ class ArticleEdit(LoginRequiredMixin, UpdateView):
     success_url = '/'
 
 
-class ArticleDelete(LoginRequiredMixin, DeleteView):
+class ArticleDelete(PermissionRequiredMixin, LoginRequiredMixin, DeleteView):
     raise_exception = True
     model = Post
     template_name = 'article_delete.html'

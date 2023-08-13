@@ -1,4 +1,4 @@
-from django.urls import path, include
+from django.urls import path
 from . import views
 from .views import NewsList, NewsDetail, Search, NewsEdit, NewsDelete, ArticleEdit, ArticleDelete
 
@@ -17,6 +17,5 @@ urlpatterns = [
     path('articles/create/', views.ArticleCreate.as_view(), name='articles_create'),  # URL-шаблон для создания статьи
     path('articles/<int:pk>/edit/', ArticleEdit.as_view(), name='article_edit'),  # URL-шаблон для редактирования статьи
     path('articles/<int:pk>/delete/', ArticleDelete.as_view(), name='article_delete'),  # URL-шаблон для удаления статьи
-    path('accounts/', include('allauth.urls')),  # запросы от пользователей по ссылкам, которые
-    # начинаются с /accounts/
+
 ]

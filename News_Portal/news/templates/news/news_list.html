@@ -5,6 +5,11 @@
 {% block content %}
     <h2>Список новостей</h2>
 <hr />
+    <!--Будем проверять права пользователя-->
+    {% if perms.news.add_post %}
+    <h3><a href="{% url 'news:news_create' %}">Добавить новость</a></h3>
+    <hr>
+    {% endif %}
     <ul>
         {% for post in news %}
             <h3>{{ post.title|censor }}</h3>
