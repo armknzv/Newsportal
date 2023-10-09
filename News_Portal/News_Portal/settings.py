@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
     'django.contrib.sites',
     'django.contrib.flatpages',
     'news.apps.NewsConfig',
@@ -57,6 +58,10 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # AccountMiddleware действует как связующее звено между
+    # процессом обработки запросов Django, системой сессий, аутентификацией и перенаправлениями,
+    # это ключевой элемент для работы 'django-allauth'.
+    'allauth.account.middleware.AccountMiddleware',
 ]
 
 ROOT_URLCONF = 'News_Portal.urls'
@@ -72,7 +77,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                # `allauth` обязательно нужен этот процессор
+                # для `allauth` обязательно нужен этот процессор ('django.template.context_processors.request',)
                 'django.template.context_processors.request',
             ],
         },
@@ -115,7 +120,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization (Интернационализация)
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
-LANGUAGE_CODE = 'ru'
+LANGUAGE_CODE = 'ru-RU'
 
 TIME_ZONE = 'UTC'
 
