@@ -18,7 +18,6 @@ def Start_Padge(request):
     news = Post.objects.filter(type='NW').order_by('-creationDate')[:4]
     return render(request, 'flatpages/Start.html', {'news': news})
 
-
 # ====== Новости =======================================================================================================
 class NewsList(ListView):
     paginate_by = 10
@@ -102,7 +101,6 @@ class ArticleCreate(PermissionRequiredMixin, LoginRequiredMixin, CreateView):
 
 
 class ArticleEdit(PermissionRequiredMixin, LoginRequiredMixin, UpdateView):
-    permission_required = 'news.change_post'  # Указываем необходимое право доступа
     raise_exception = True
     model = Post
     form_class = ArticleForm
@@ -111,7 +109,6 @@ class ArticleEdit(PermissionRequiredMixin, LoginRequiredMixin, UpdateView):
 
 
 class ArticleDelete(PermissionRequiredMixin, LoginRequiredMixin, DeleteView):
-    permission_required = 'news.change_post'  # Указываем необходимое право доступа
     raise_exception = True
     model = Post
     template_name = 'article_delete.html'

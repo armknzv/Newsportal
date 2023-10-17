@@ -22,4 +22,5 @@ urlpatterns = [
     path('', include('news.urls')),
     path('accounts/', include('allauth.urls')),  # запросы от пользователей по ссылкам, которые
     # начинаются с /accounts/
+    path('subscriptions/', include('subscriptions.urls')),
 ]
